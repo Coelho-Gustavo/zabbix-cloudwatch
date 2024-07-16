@@ -3,7 +3,7 @@
 # Description: A class to get aws access key and secret of an AWS account
 
 import os
-import ConfigParser
+import configparser
 
 class awsAccount:
     _aws_access_key_id = None 
@@ -12,7 +12,7 @@ class awsAccount:
     def __init__(self, account):
         base_path = os.path.dirname(os.path.realpath(__file__))
         CRED = base_path + '/conf/awscred'
-        Config = ConfigParser.ConfigParser()
+        Config = configparser.ConfigParser()
         # Read configuration file
         Config.read(CRED)
         dict = {}
@@ -23,7 +23,7 @@ class awsAccount:
            try:
                 dict[option] = Config.get(account, option)
                 if dict[option] == -1:
-                    DebugPrint("skip: %s" % option)
+                    print("skip: %s" % option)
            except:
                 print("exception on %s!" % option)
                 dict[option] = None

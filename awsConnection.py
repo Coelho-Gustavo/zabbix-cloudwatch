@@ -2,15 +2,7 @@
 # Author: Long Chen
 # Description: A class to establish connections to aws services
 
-import boto.ec2.cloudwatch
-import boto.ec2.elb
-import boto.sqs
-import boto.rds
-import boto.dynamodb
-import boto.redshift
-import boto.sns
-import boto.route53
-import boto.emr
+import boto3
 
 class awsConnection:
     _aws_connection = None
@@ -20,36 +12,45 @@ class awsConnection:
 
     # CloudWatch connection
     def cloudwatchConnect(self, region, access_key, secret_key):
-        self._aws_connection = boto.ec2.cloudwatch.connect_to_region(region, aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+        session = boto3.session.Session(aws_access_key_id = access_key, aws_secret_acces_key = secret_key, region_name = region)
+        self._aws_connection = session.client('cloudwatch')
 
     # ELB connection
     def elbConnect(self, region, access_key, secret_key):
-        self._aws_connection = boto.ec2.elb.connect_to_region(region, aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+        session = boto3.session.Session(aws_access_key_id = access_key, aws_secret_acces_key = secret_key, region_name = region)
+        self._aws_connection = session.client('elb')
 
     # SQS connection
     def sqsConnect(self, region, access_key, secret_key):
-        self._aws_connection = boto.sqs.connect_to_region(region, aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+        session = boto3.session.Session(aws_access_key_id = access_key, aws_secret_acces_key = secret_key, region_name = region)
+        self._aws_connection = session.client('sqs')
 
     # RDS connection
     def rdsConnect(self, region, access_key, secret_key):
-        self._aws_connection = boto.rds.connect_to_region(region, aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+        session = boto3.session.Session(aws_access_key_id = access_key, aws_secret_acces_key = secret_key, region_name = region)
+        self._aws_connection = session.client('rds')
 
     # DynamoDB connection
     def dynamodbConnect(self, region, access_key, secret_key):
-        self._aws_connection = boto.dynamodb.connect_to_region(region, aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+        session = boto3.session.Session(aws_access_key_id = access_key, aws_secret_acces_key = secret_key, region_name = region)
+        self._aws_connection = session.client('dynamodb')
 
     # Redshift connection
     def redshiftConnect(self, region, access_key, secret_key):
-        self._aws_connection = boto.redshift.connect_to_region(region, aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+        session = boto3.session.Session(aws_access_key_id = access_key, aws_secret_acces_key = secret_key, region_name = region)
+        self._aws_connection = session.client('redshift')
 
     # SNS connection
     def snsConnect(self, region, access_key, secret_key):
-        self._aws_connection = boto.sns.connect_to_region(region, aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+        session = boto3.session.Session(aws_access_key_id = access_key, aws_secret_acces_key = secret_key, region_name = region)
+        self._aws_connection = session.client('sns')
 
     # Route53 connection
     def route53Connect(self, region, access_key, secret_key):
-        self._aws_connection = boto.route53.connect_to_region(region, aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+        session = boto3.session.Session(aws_access_key_id = access_key, aws_secret_acces_key = secret_key, region_name = region)
+        self._aws_connection = session.client('route53')
 
     # EMR connection
     def emrConnect(self, region, access_key, secret_key):
-        self._aws_connection = boto.emr.connect_to_region(region, aws_access_key_id=access_key, aws_secret_access_key=secret_key)
+        session = boto3.session.Session(aws_access_key_id = access_key, aws_secret_acces_key = secret_key, region_name = region)
+        self._aws_connection = session.client('emr')

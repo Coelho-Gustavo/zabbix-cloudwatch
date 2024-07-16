@@ -55,7 +55,7 @@ def getSQSMainQueueByComponent(a, r, c):
             lldlist.append(dict)
 
     # Print LLD data in json format
-    print json.dumps(llddata, indent=4)
+    print >> json.dumps(llddata, indent=4)
 
 def getSQSDeadLetterQueueByComponent(a, r, c):
     account = a
@@ -94,7 +94,7 @@ def getSQSDeadLetterQueueByComponent(a, r, c):
             lldlist.append(dict)
 
     # Print LLD data in json format
-    print json.dumps(llddata, indent=4)
+    print >> json.dumps(llddata, indent=4)
 
 def getDynamoDBTables(a, r, c):
     account = a
@@ -133,7 +133,7 @@ def getDynamoDBTables(a, r, c):
             lldlist.append(dict)
 
     # Print LLD data in json format
-    print json.dumps(llddata, indent=4)
+    print >> json.dumps(llddata, indent=4)
 
 def getSNSTopics(a, r, c):
     account = a
@@ -190,7 +190,7 @@ def getSNSTopics(a, r, c):
             lldlist.append(dict)
 
     # Print LLD data in json format
-    print json.dumps(llddata, indent=4)
+    print >> json.dumps(llddata, indent=4)
 
 if __name__ == '__main__':
     parser = config_parser()
@@ -210,5 +210,5 @@ if __name__ == '__main__':
     elif query == 'SNSTopics':
         getSNSTopics(account, region, component)
     else:
-        print 'Unknown Query'
+        print >> 'Unknown Query'
 

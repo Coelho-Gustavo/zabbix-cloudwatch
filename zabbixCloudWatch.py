@@ -18,7 +18,7 @@ from optparse import OptionParser
 from operator import itemgetter
 from awsAccount import awsAccount
 from awsConnection import awsConnection
-from boto.exception import BotoServerError
+from botocore.exceptions import ClientError
 from pyZabbixSender import pyZabbixSender
 
 # aws services metrics configuration file
@@ -145,8 +145,8 @@ def getCloudWatchDynamodbData(a, r, s, t, i=None):
 
         return cloud_watch_data
 
-    except BotoServerError, error:
-        print >> sys.stderr, 'CloudWatch ERROR: ', error
+    except ClientError:
+        print >> sys.stderr, 'CloudWatch ERROR: ', ClientError
 
 # Get cloudwatch metrics data of an AWS service
 def getCloudWatchData(a, r, s, d):
@@ -199,8 +199,8 @@ def getCloudWatchData(a, r, s, d):
 
         return cloud_watch_data
 
-    except BotoServerError, error:
-        print >> sys.stderr, 'CloudWatch ERROR: ', error
+    except ClientError:
+        print >> sys.stderr, 'CloudWatch ERROR: ', ClientError
 
 # Send latest cloudwatch data to zabbix server
 def sendLatestCloudWatchData(z, h, d):
@@ -383,7 +383,7 @@ if __name__ == '__main__':
                 job_flow_id = cluster.id
 
         if job_flow_id is None:
-            print "EMR not found."
+            print >> "EMR not found."
             exit(1)
 
         dimensions['JobFlowId'] = job_flow_id
