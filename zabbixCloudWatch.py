@@ -97,7 +97,7 @@ def getCloudWatchDynamodbData(a, r, s, t, i=None):
                     dimensions['TableName'] = table_name
                     dimensions['Operation'] = op
                     # Get cloudwatch data
-                    results = cw.get_metric_statistics(period, start_time, end_time, metric_name, namespace, statistics, dimensions)
+                    results = cw.get_metric_statistics(int(period), start_time, end_time, metric_name, namespace, [statistics], [dimensions])
                     metric_results = {}
                     # Generate a zabbix trapper key for a metric
                     zabbix_key = 'DynamoDB.' + op + '.' + metric_name + '.' + statistics + '["' + account + '","' + aws_region + '","' + table_name + '"]'
@@ -110,7 +110,7 @@ def getCloudWatchDynamodbData(a, r, s, t, i=None):
                     dimensions['TableName'] = table_name
                     dimensions['Operation'] = op
                     # Get cloudwatch data
-                    results = cw.get_metric_statistics(period, start_time, end_time, metric_name, namespace, statistics, dimensions)
+                    results = cw.get_metric_statistics(int(period), start_time, end_time, metric_name, namespace, [statistics], [dimensions])
                     metric_results = {}
                     # Generate a zabbix trapper key for a metric
                     zabbix_key = 'DynamoDB.' + op + '.' + metric_name + '.' + statistics + '["' + account + '","' + aws_region + '","' + table_name + '"]'
@@ -123,7 +123,7 @@ def getCloudWatchDynamodbData(a, r, s, t, i=None):
                     dimensions['TableName'] = table_name
                     dimensions['GlobalSecondaryIndexName'] = global_index
                     # Get cloudwatch data
-                    results = cw.get_metric_statistics(period, start_time, end_time, metric_name, namespace, statistics, dimensions)
+                    results = cw.get_metric_statistics(int(period), start_time, end_time, metric_name, namespace, [statistics], [dimensions])
                     metric_results = {}
                     # Generate a zabbix trapper key for a metric
                     zabbix_key = 'DynamoDB.' +  metric_name + '.' + statistics + '["' + account + '","' + aws_region + '","' + table_name + '","' + global_index + '"]'
@@ -134,7 +134,7 @@ def getCloudWatchDynamodbData(a, r, s, t, i=None):
             else:
                 dimensions['TableName'] = table_name
                 # Get cloudwatch data
-                results = cw.get_metric_statistics(period, start_time, end_time, metric_name, namespace, statistics, dimensions)
+                results = cw.get_metric_statistics(int(period), start_time, end_time, metric_name, namespace, [statistics], [dimensions])
                 metric_results = {}
                 # Generate a zabbix trapper key for a metric
                 zabbix_key = 'DynamoDB.' +  metric_name + '.' + statistics + '["' + account + '","' + aws_region + '","' + table_name + '"]'
@@ -178,7 +178,7 @@ def getCloudWatchData(a, r, s, d):
             metric_name = metric['metric']
             statistics = metric['statistics']
             # Get cloudwatch data
-            results = cw.get_metric_statistics(period, start_time, end_time, metric_name, namespace, statistics, dimensions)
+            results = cw.get_metric_statistics(int(period), start_time, end_time, metric_name, namespace, [statistics], [dimensions])
 
             metric_results = {}
 
